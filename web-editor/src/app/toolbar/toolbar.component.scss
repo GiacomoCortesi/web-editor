@@ -1,0 +1,32 @@
+// Standard Toolbar example
+/** .example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. 
+  flex: 1 1 auto; 
+}
+*/
+
+nav.mat-tab-nav-bar {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+
+//nav {  
+//  padding-top: 1em;
+//  padding-bottom: 1em;
+//  //background-color: #e9f9fb;
+//}
+
+.demo-tab-group {
+  border: 1px solid #e8e8e8;
+}
+
+.demo-tab-content {
+  padding: 16px;
+}
+
+a {
+  text-decoration: none; 
+  font-size: 2em;
+}

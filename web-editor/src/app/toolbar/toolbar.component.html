@@ -1,0 +1,29 @@
+<!-- <mat-toolbar color="primary">
+  <span>{{ titleToolbar }}</span>
+
+  <span class="example-fill-remaining-space"></span>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="icon">thumb_up</mat-icon>
+      Second
+    </ng-template>
+    Content 2
+  </mat-tab>
+  <button mat-button>
+  </button>
+  <span>Right Aligned Text</span>
+</mat-toolbar> -->
+
+
+<nav mat-tab-nav-bar class="demo-tab-group">
+  <a mat-tab-link
+     *ngFor="let link of ['viewer', 'scripts', 'editor']"
+     [routerLink]="link"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+    {{link.toUpperCase()}}
+  </a>
+</nav>
+
+<router-outlet></router-outlet>
+

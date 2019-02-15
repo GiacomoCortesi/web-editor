@@ -1,0 +1,1 @@
+angular.json -in 0,/src\/styles\.scss/ s/src\/styles\.scss/node_modules\/bootstrap\/dist\/css\/bootstrap.min.css,\n              "\/src\/styles\.scss/

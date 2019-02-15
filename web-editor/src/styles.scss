@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+  background: blue;
+  margin-bottom: -2em;
+  height: 10px;
+}
+
+ 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
