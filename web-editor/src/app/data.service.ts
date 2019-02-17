@@ -9,16 +9,20 @@ export class DataService {
   constructor(private http: HttpClient) { }
   backend = "http://172.17.0.2:5000"
 
-  getFile(filename: string) {
-    return this.http.get(this.backend + '/' + filename, {responseType: 'text'})
+  getFiles(folder: string) {
+    return this.http.get(this.backend + '/' + folder)
+  }
+
+  getFile(folder: string, filename: string) {
+    return this.http.get(this.backend + '/' + folder + '/' + filename, {responseType: 'text'})
+  }
+
+  listFiles(folder) {
+    return this.http.get(this.backend + '/list/' + folder)
   }
   
-  listFiles() {
-    return this.http.get(this.backend + '/list')
-  }
-  
-  getMtime(filename) {
-    return this.http.get(this.backend + '/' + filename + '/mtime', {responseType: 'text'})
+  getMtime(folder, filename) {
+    return this.http.get(this.backend + '/' + folder + '/' + filename + '/mtime', {responseType: 'text'})
   }
 
 }

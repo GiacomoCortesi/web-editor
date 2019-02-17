@@ -1,3 +1,15 @@
-<p>
-  scripts works!
-</p>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <div class="mat-card-wrapper" *ngFor="let item of filesContent">
+    <mat-grid-tile>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div><mat-card-title>{{ item.filename }}</mat-card-title> </div>
+        </mat-card-header>
+        <mat-card-content >
+          <div class="text-div"> <span>{{ item.content }}</span> </div>
+<!--  <textarea>{{ item.content }}</textarea> -->
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>

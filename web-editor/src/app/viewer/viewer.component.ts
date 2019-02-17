@@ -24,12 +24,12 @@ export class ViewerComponent implements OnInit {
   private selected_mtime: String;
 
   ngOnInit() {
-    this.showFiles();
-    this.getFile('README.md');
+    this.showFiles('md_files');
+    this.getFile('md_files', 'README.md');
   }
 
-  showFiles() {
-    this.data.listFiles().subscribe(
+  showFiles(folder) {
+    this.data.listFiles(folder).subscribe(
       data => {
       this.files = data;
       for(let f of data) {
@@ -39,18 +39,18 @@ export class ViewerComponent implements OnInit {
       });
   }
   
-  getFile(filename) {
-    this.data.getFile(filename).subscribe(
+  getFile(folder, filename) {
+    this.data.getFile(folder, filename).subscribe(
       data => {
-      this.html = converter.makeHtml(data) 
+      this.html = converter.makeHtml(data);
       this.selected = this.capitalFirstLetter(filename.replace('_', ' ').replace('.md', ''));
-      this.selected_mtime = this.getMtime(filename)
-      console.log(data)
+      this.selected_mtime = this.getMtime(folder, filename);
+      console.log(data);
       });
   }
 
-  getMtime(filename) {
-    this.data.getMtime(filename).subscribe(
+  getMtime(folder, filename) {
+    this.data.getMtime(folder, filename).subscribe(
       data => {
       this.selected_mtime = data;
       console.log(data)

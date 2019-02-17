@@ -12,6 +12,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 // Import components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -43,7 +45,8 @@ import { ScriptsComponent } from './scripts/scripts.component';
     MatTabsModule,
     MatCardModule,
     HttpClientModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

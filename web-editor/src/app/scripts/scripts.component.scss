@@ -1,0 +1,46 @@
+.container {
+  display: flex;  
+}
+
+
+// Cleanup text area style. TODO: Review
+textarea {
+  border: none;
+  overflow: auto;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+}
+
+
+// Span needed to convert \n to html line break
+span {
+  white-space: pre-line;
+}
+
+.text-div {
+  // Adapt div size to content
+  display: block;
+  overflow: auto;
+  // Display left scroll bar
+  overflow-y: scroll;
+  // Set div max height
+  max-height: 80em;
+}
+
+mat-card {
+  width: 100%; 
+  display: block;
+  overflow: auto;
+  margin: 2.5em;
+}
+
+mat-card-content {
+  margin: 2.5em;
+}
+

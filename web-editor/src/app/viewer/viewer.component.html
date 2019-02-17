@@ -8,7 +8,7 @@ accept=".txt"
 <mat-card>
 <mat-nav-list *ngFor="let f of files"> 
   <mat-list-item>
-     <a role="button" (click)="getFile(f)">{{ capitalFirstLetter(f.replace('_', ' ').replace('.md', '')) }}</a>
+     <a role="button" (click)="getFile('md_files', f)">{{ capitalFirstLetter(f.replace('_', ' ').replace('.md', '')) }}</a>
   <mat-divider></mat-divider>
   </mat-list-item>
 </mat-nav-list>
