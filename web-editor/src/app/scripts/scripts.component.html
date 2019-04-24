@@ -1,9 +1,10 @@
-<mat-grid-list cols="2" rowHeight="2:1">
+<div class="container">
+<mat-grid-list cols="2" rowHeight="50em" gutterSize="3em">
   <div class="mat-card-wrapper" *ngFor="let item of filesContent">
-    <mat-grid-tile>
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div><mat-card-title>{{ item.filename }}</mat-card-title> </div>
+    <mat-grid-tile class="my-mat-grid-tile">
+      <mat-card class="my-mat-card">
+        <mat-card-header class="my-mat-card-header">
+          <mat-card-title>{{ item.filename }}</mat-card-title>
         </mat-card-header>
         <mat-card-content >
           <div class="text-div"> <span>{{ item.content }}</span> </div>
@@ -13,3 +14,4 @@
     </mat-grid-tile>
   </div>
 </mat-grid-list>
+</div>

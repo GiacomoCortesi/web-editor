@@ -10,7 +10,7 @@ export class ScriptsComponent implements OnInit {
 
   constructor(private data: DataService) { }
   private files;
-  private filesContent: Array<String> = [];
+  private filesContent: Object;
   private html;
   ngOnInit() {
     this.showFiles('scripts');

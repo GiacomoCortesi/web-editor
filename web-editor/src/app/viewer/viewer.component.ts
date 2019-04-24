@@ -19,23 +19,22 @@ export class ViewerComponent implements OnInit {
   private fileList: Array<String> = [];
   private filename: String; 
   constructor(private data: DataService) {
-
  }
-  private selected_mtime: String;
+  private selected_mtime: string;
 
   ngOnInit() {
-    this.showFiles('md_files');
-    this.getFile('md_files', 'README.md');
+    this.showFiles('cheatsheets');
+    this.getFile('cheatsheets', 'README.md');
   }
 
   showFiles(folder) {
     this.data.listFiles(folder).subscribe(
       data => {
       this.files = data;
-      for(let f of data) {
-        this.fileList.push(this.capitalFirstLetter(f.replace('_', ' ').replace('.md', '')));
+      for(let f of this.files) {
+        this.fileList.push(this.capitalFirstLetter(f.replace(/_/g, ' ').replace('.md', '')));
       }
-      console.log(data)
+      console.log(this.files)
       });
   }
   
@@ -43,8 +42,8 @@ export class ViewerComponent implements OnInit {
     this.data.getFile(folder, filename).subscribe(
       data => {
       this.html = converter.makeHtml(data);
-      this.selected = this.capitalFirstLetter(filename.replace('_', ' ').replace('.md', ''));
-      this.selected_mtime = this.getMtime(folder, filename);
+      this.selected = filename.replace(/_/g, ' ').replace('.md', '').toUpperCase();
+      this.selected_mtime = <string><unknown>this.getMtime(folder, filename);
       console.log(data);
       });
   }
@@ -66,6 +65,10 @@ export class ViewerComponent implements OnInit {
       }
   
       return str.join(" ");
+  }
+
+  prettify (str) {
+    return str.replace(/_/g, ' ').replace('.md', '').toUpperCase();
   }
 }
 

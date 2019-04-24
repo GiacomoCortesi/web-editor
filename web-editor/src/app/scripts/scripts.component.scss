@@ -1,7 +1,7 @@
 .container {
-  display: flex;  
+  margin-top: 3em;
+  width: 100%;
 }
-
 
 // Cleanup text area style. TODO: Review
 textarea {
@@ -23,24 +23,29 @@ span {
   white-space: pre-line;
 }
 
+
+
 .text-div {
   // Adapt div size to content
   display: block;
   overflow: auto;
-  // Display left scroll bar
-  overflow-y: scroll;
+  // Always Display left scroll bar
+  //overflow-y: scroll;
   // Set div max height
-  max-height: 80em;
+  max-height: 38em;
+
 }
 
-mat-card {
-  width: 100%; 
-  display: block;
-  overflow: auto;
-  margin: 2.5em;
+.my-mat-card {
+  width: 95%; 
 }
 
 mat-card-content {
   margin: 2.5em;
+}
+
+.my-mat-card-header {
+  margin-left: 1.5em;
+  
 }
 

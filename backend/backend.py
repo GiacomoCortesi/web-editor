@@ -9,7 +9,7 @@ import datetime
 app = Flask(__name__)
 CORS(app)
 
-DIR_PATH = "/root/"
+DIR_PATH = "/root/mix_scripts/"
 
 @app.route('/')
 def hello():
@@ -55,4 +55,4 @@ def get_files(folder):
     return json.dumps(ret), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)
