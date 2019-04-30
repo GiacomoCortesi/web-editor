@@ -16,7 +16,6 @@ export class ViewerComponent implements OnInit {
   private html
   private selected: String;
   private files;
-  private fileList: Array<String> = [];
   private filename: String; 
   constructor(private data: DataService) {
  }
@@ -31,8 +30,14 @@ export class ViewerComponent implements OnInit {
     this.data.listFiles(folder).subscribe(
       data => {
       this.files = data;
+      // Skip files starting with '.'
       for(let f of this.files) {
-        this.fileList.push(this.capitalFirstLetter(f.replace(/_/g, ' ').replace('.md', '')));
+        if (f[0] == '.') {
+          let index = this.files.indexOf(f)
+          if(index > -1) {
+            this.files.splice(index, 1)
+          }
+        }
       }
       console.log(this.files)
       });
@@ -41,11 +46,13 @@ export class ViewerComponent implements OnInit {
   getFile(folder, filename) {
     this.data.getFile(folder, filename).subscribe(
       data => {
+      // console.log(filename)
       this.html = converter.makeHtml(data);
-      this.selected = filename.replace(/_/g, ' ').replace('.md', '').toUpperCase();
+      // this.selected = filename.replace(/_/g, ' ').replace('.md', '').toUpperCase();
+      this.selected=filename
       this.selected_mtime = <string><unknown>this.getMtime(folder, filename);
       console.log(data);
-      });
+    });
   }
 
   getMtime(folder, filename) {

@@ -21,6 +21,15 @@ export class ScriptsComponent implements OnInit {
     this.data.listFiles(folder).subscribe(
       data => {
       this.files = data;
+      // Skip files starting with '.'
+      for(let f of this.files) {
+        if (f[0] == '.') {
+          let index = this.files.indexOf(f)
+          if(index > -1) {
+            this.files.splice(index, 1)
+          }
+        }
+      }
       console.log(data)
       });
   }
