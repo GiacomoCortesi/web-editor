@@ -38,7 +38,11 @@ def get_mtime(folder, name):
 '''
 @app.route('/list/<name>', methods=['GET'])
 def list_files(name):
-    return json.dumps(os.listdir(DIR_PATH + name)), 200    
+    files_list = [] 
+    for f in os.listdir(DIR_PATH + name):
+        if os.path.isfile(DIR_PATH + name + '/' + f):
+            files_list.append(f)
+    return json.dumps(files_list), 200    
 
 
 '''
