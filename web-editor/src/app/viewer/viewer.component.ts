@@ -12,7 +12,7 @@ const converter = new showdown.Converter();
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit {
-
+  private path: string = '/root/mix_scripts/cheatsheets'
   private html
   private selected: String;
   private files;
@@ -23,7 +23,7 @@ export class ViewerComponent implements OnInit {
 
   ngOnInit() {
     this.showFiles('cheatsheets');
-    this.getFile('cheatsheets', 'README.md');
+    this.getFile(this.path, 'README.md');
   }
 
   showFiles(folder) {

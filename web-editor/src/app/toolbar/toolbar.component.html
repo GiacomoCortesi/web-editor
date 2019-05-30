@@ -17,7 +17,7 @@
 
 <nav mat-tab-nav-bar class="demo-tab-group">
   <a mat-tab-link
-     *ngFor="let link of ['viewer', 'scripts', 'editor']"
+     *ngFor="let link of ['viewer', 'scripts', 'tree-viewer']"
      [routerLink]="link"
      routerLinkActive #rla="routerLinkActive"
      [active]="rla.isActive">

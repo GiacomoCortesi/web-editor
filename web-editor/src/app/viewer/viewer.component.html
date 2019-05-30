@@ -7,7 +7,7 @@ accept=".txt"
   <div class="col-sm-3">
 <mat-card>
 <mat-nav-list> 
-  <mat-list-item (click)="getFile('cheatsheets', f)" *ngFor="let f of files">
+  <mat-list-item (click)="getFile(this.path, f)" *ngFor="let f of files">
      {{ prettify(f) }}
   <mat-divider></mat-divider>
   </mat-list-item>

@@ -13,14 +13,15 @@ import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTreeModule} from '@angular/material/tree';
 
 // Import components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ViewerComponent } from './viewer/viewer.component';
-import { EditorComponent } from './editor/editor.component';
 import { ScriptsComponent } from './scripts/scripts.component';
+import { TreeViewerComponent } from './tree-viewer/tree-viewer.component';
 
 
 
@@ -31,8 +32,8 @@ import { ScriptsComponent } from './scripts/scripts.component';
     HomeComponent,
     ToolbarComponent,
     ViewerComponent,
-    EditorComponent,
-    ScriptsComponent
+    ScriptsComponent,
+    TreeViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,8 @@ import { ScriptsComponent } from './scripts/scripts.component';
     MatCardModule,
     HttpClientModule,
     MatListModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTreeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
