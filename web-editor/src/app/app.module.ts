@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTreeModule} from '@angular/material/tree';
+import { MatInputModule } from '@angular/material/input';
 
 // Import components
 import { AppComponent } from './app.component';
@@ -48,7 +49,8 @@ import { TreeViewerComponent } from './tree-viewer/tree-viewer.component';
     HttpClientModule,
     MatListModule,
     MatGridListModule,
-    MatTreeModule
+    MatTreeModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

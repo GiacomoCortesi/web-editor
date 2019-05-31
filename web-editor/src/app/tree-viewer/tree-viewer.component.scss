@@ -9,8 +9,25 @@
   list-style-type: none;
 }
 
+a {
+  text-decoration: none
+}
+
 .container {
   width: 100%;
   margin-top: 3em;
 }
 
+a:hover {
+  color: grey;
+}
+
+a:active {
+  color: grey;
+}
+
+// .div-border {
+//   border-style: solid;
+//   border-color: blue;
+//   border-radius: 5px;
+// }

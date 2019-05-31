@@ -72,13 +72,25 @@ def get_files(folder):
     return json.dumps(ret), 200
 
 '''
+    Save received text into file
+    NOTE: file is the full file path
+'''
+@app.route('/file/save', methods=['GET'])
+def save_file():
+    file = request.args.get('file')
+    text = request.args.get('text')
+    with open(file, 'w') as f:
+      f.write(text)
+    return json.dumps("ok"), 200
+
+'''
   Retrieve the tree in JSON format given the parent folder path.
 '''
 @app.route('/tree', methods=['GET'])
 def get_dir_tree():
   parent_path = TREE_DIR_PATH
   hierarchy = path_hierarchy(parent_path)
-  return json.dumps([hierarchy]), 200
+  return json.dumps(hierarchy), 200
 
 def path_hierarchy(path):
   hierarchy = {'type': 'folder','name': os.path.basename(path), 'path': path}

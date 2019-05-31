@@ -29,6 +29,13 @@ export class DataService {
     return this.http.get(this.backend + '/file/mtime', {responseType: 'text', params: params})
   }
 
+  saveFile(file: string, text: string) {
+    let params = new HttpParams().set('file', file);
+    params = params.append('text', text);
+    
+    return this.http.get(this.backend + '/file/save', {params: params})
+  }
+
   getTree() {
     return this.http.get(this.backend + '/tree')
   }

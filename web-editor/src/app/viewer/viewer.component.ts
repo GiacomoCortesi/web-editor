@@ -16,10 +16,14 @@ export class ViewerComponent implements OnInit {
   private html
   private selected: String;
   private files;
-  private filename: String; 
-  constructor(private data: DataService) {
- }
+  private filename: String;
+  private text: string;
+  private editMode: bool = false;
   private selected_mtime: string;
+  private rerender: bool = false;
+
+  constructor(private data: DataService) {
+  }
 
   ngOnInit() {
     this.showFiles('cheatsheets');
@@ -48,6 +52,7 @@ export class ViewerComponent implements OnInit {
       data => {
       // console.log(filename)
       this.html = converter.makeHtml(data);
+      this.text = data
       // this.selected = filename.replace(/_/g, ' ').replace('.md', '').toUpperCase();
       this.selected=filename
       this.selected_mtime = <string><unknown>this.getMtime(folder, filename);
@@ -77,5 +82,18 @@ export class ViewerComponent implements OnInit {
   prettify (str) {
     return str.replace(/_/g, ' ').replace('.md', '').toUpperCase();
   }
+
+  enableEditMode() {
+    this.editMode = true;
+  }
+
+  saveFile(file, text) {
+    this.data.saveFile(file, text).subscribe(
+      data => {
+        this.getFile(this.path, this.selected);
+      }); 
+    this.editMode = false;
+  }
+
 }
 

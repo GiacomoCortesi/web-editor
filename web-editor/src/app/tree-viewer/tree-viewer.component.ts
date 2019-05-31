@@ -32,7 +32,7 @@ export class TreeViewerComponent implements OnInit {
     this.data.getTree().subscribe(
       data => {
       this.tree = data;
-      this.dataSource.data = this.tree;
+      this.dataSource.data = this.tree['children'];
       console.log(this.tree);
       });
   }
@@ -59,6 +59,10 @@ export class TreeViewerComponent implements OnInit {
       this.selected_mtime = data;
       console.log(data)
       }); 
+  }
+
+  prettify (str) {
+    return str.replace(/_/g, ' ').replace('.md', '').toUpperCase();
   }
 
 }
