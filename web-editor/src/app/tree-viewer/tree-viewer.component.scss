@@ -26,6 +26,28 @@ a:active {
   color: grey;
 }
 
+.loading {
+  font-size: 3em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.loading-div { 
+  height: 100%;
+  position: relative;
+  margin: auto;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 // .div-border {
 //   border-style: solid;
 //   border-color: blue;
