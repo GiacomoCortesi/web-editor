@@ -6,7 +6,12 @@ accept=".txt"
   <div class="row">
     <div class="col-sm-3">
       <mat-card>
-        <mat-nav-list> 
+        <mat-nav-list>
+            <mat-list-item (click)="createFile()">
+                NEW FILE
+                <mat-icon class="my-mat-icon">create</mat-icon>
+              <mat-divider></mat-divider>
+            </mat-list-item>
           <mat-list-item (click)="getFile(this.path, f)" *ngFor="let f of files">
             {{ prettify(f) }}
           <mat-divider></mat-divider>
@@ -14,8 +19,6 @@ accept=".txt"
         </mat-nav-list>
       </mat-card>
     </div>
-
-
     <div class="col-sm-9">
       <mat-card>
         <mat-card-header>
@@ -32,9 +35,9 @@ accept=".txt"
           <button *ngIf="editMode" (click)="saveFile(this.path + '/' + selected, text)" class="custom-stroked-button" mat-stroked-button>SAVE</button>
         </mat-card-actions>
         <div *ngIf="editMode">
-        <div class="text-div" >
-          <textarea class="my-textarea" placeholder="Edit markdown file" [(ngModel)]="text" [value]="text"></textarea>
-        </div>
+          <div class="text-div" >
+            <textarea class="my-textarea" placeholder="Edit markdown file" [(ngModel)]="text" [value]="text"></textarea>
+          </div>
         </div>
       </mat-card>
     </div>
@@ -48,4 +51,3 @@ accept=".txt"
     </div>
 </div>
 </ng-template>
-

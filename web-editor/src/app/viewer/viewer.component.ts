@@ -58,6 +58,7 @@ export class ViewerComponent implements OnInit {
       this.selected_mtime = <string><unknown>this.getMtime(folder, filename);
       console.log(data);
     });
+    this.editMode = false;
   }
 
   getMtime(folder, filename) {

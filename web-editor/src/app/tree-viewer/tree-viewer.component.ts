@@ -3,6 +3,9 @@ import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import { DataService } from  '../data.service';
 
+// TODO: Add service for file handling, to be used both by viewer and tree-viewer components
+// NOTE: This will require some refactoring  
+
 declare var require: any;
 const showdown = require('showdown');
 const converter = new showdown.Converter();
@@ -18,6 +21,9 @@ export class TreeViewerComponent implements OnInit {
 
   private tree: Object;
   private path: string = "/root/xran-box/README.md"
+
+  private text: string;
+  private editMode: bool = false;
 
   constructor(private data: DataService) {
   }
@@ -44,12 +50,14 @@ export class TreeViewerComponent implements OnInit {
     folder = folder.replace(to_remove, '')
     this.data.getFile(folder, filename).subscribe(
       data => {
+      this.text = data
       // console.log(filename)
       this.html = converter.makeHtml(data);
       // this.selected = filename.replace(/_/g, ' ').replace('.md', '').toUpperCase();
       this.selected=filename
       this.selected_mtime = <string><unknown>this.getMtime(folder, filename);
       console.log(data);
+      this.editMode = false;
     });
   }
 
@@ -63,6 +71,18 @@ export class TreeViewerComponent implements OnInit {
 
   prettify (str) {
     return str.replace(/_/g, ' ').replace('.md', '').toUpperCase();
+  }
+
+  enableEditMode() {
+    this.editMode = true;
+  }
+
+  saveFile(file, text) {
+    this.data.saveFile(file, text).subscribe(
+      data => {
+        this.getFile(this.path, this.selected);
+      }); 
+    this.editMode = false;
   }
 
 }

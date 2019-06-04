@@ -42,6 +42,16 @@
         <mat-card-content class="my-mat-card-content">
           <p [innerHtml]="html"></p>
         </mat-card-content>
+        <mat-card-actions>
+          <button [disabled]="editMode" class="custom-stroked-button" (click)="enableEditMode()" mat-stroked-button>EDIT</button>
+          <!--<button class="custom-stroked-button" mat-stroked-button>GIT</button>-->
+          <button *ngIf="editMode" (click)="saveFile(this.path, text)" class="custom-stroked-button" mat-stroked-button>SAVE</button>
+        </mat-card-actions>
+        <div *ngIf="editMode">
+          <div class="text-div" >
+            <textarea class="my-textarea" placeholder="Edit markdown file" [(ngModel)]="text" [value]="text"></textarea>
+          </div>
+        </div>
       </mat-card>
     </div>
   </div>
