@@ -15,6 +15,7 @@ import { MatListModule } from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTreeModule} from '@angular/material/tree';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material';
 
 // Import components
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { ScriptsComponent } from './scripts/scripts.component';
 import { TreeViewerComponent } from './tree-viewer/tree-viewer.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 
@@ -34,7 +36,8 @@ import { TreeViewerComponent } from './tree-viewer/tree-viewer.component';
     ToolbarComponent,
     ViewerComponent,
     ScriptsComponent,
-    TreeViewerComponent
+    TreeViewerComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,8 +53,10 @@ import { TreeViewerComponent } from './tree-viewer/tree-viewer.component';
     MatListModule,
     MatGridListModule,
     MatTreeModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ],
+  entryComponents: [DialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -48,7 +48,7 @@ def handle_file():
     jsonData = request.get_json()
     file = jsonData['file']
     text = jsonData['text']
-    with open(file, 'w') as f:
+    with open(file, 'w+') as f:
       f.write(text)
     return json.dumps("ok"), 200
     

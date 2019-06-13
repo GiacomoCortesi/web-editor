@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from  '../data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
+
 
 declare var require: any;
 const showdown = require('showdown');
@@ -21,8 +24,9 @@ export class ViewerComponent implements OnInit {
   private editMode: bool = false;
   private selected_mtime: string;
   private rerender: bool = false;
+  private fileToCreate: string;
 
-  constructor(private data: DataService) {
+  constructor(private data: DataService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -91,9 +95,26 @@ export class ViewerComponent implements OnInit {
   saveFile(file, text) {
     this.data.saveFile(file, text).subscribe(
       data => {
+        this.showFiles('cheatsheets')
         this.getFile(this.path, this.selected);
       }); 
     this.editMode = false;
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: {filename: this.fileToCreate}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log("Received dialog data: "+ result)
+      if (result) {
+        this.selected = result;
+        this.saveFile(this.path + '/' + result, "Brand new file")
+      }
+    });
   }
 
 }
