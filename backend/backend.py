@@ -25,8 +25,13 @@ def hello():
     Retrieve single <file> inside <folder>
 '''
 # File is the target file inside the folder
-@app.route('/file', methods=['GET'])
-def get_file():
+@app.route('/file', methods=['GET', 'POST'])
+def handle_file():
+  # Handle GET request
+  if request.method == "GET":
+    '''
+    Retrieve file at specified path
+    '''
     p = request.args.get('path')
     f = request.args.get('file')
     try:
@@ -34,6 +39,19 @@ def get_file():
           return file.read(), 200
     except IOError:
       abort(404)
+  # Handle POST request
+  if request.method == "POST":
+    '''
+    Save received text into file
+    NOTE: file is the full file path
+    '''
+    jsonData = request.get_json()
+    file = jsonData['file']
+    text = jsonData['text']
+    with open(file, 'w') as f:
+      f.write(text)
+    return json.dumps("ok"), 200
+    
 
 
 '''
@@ -71,19 +89,6 @@ def get_files(folder):
         with open(DIR_PATH + folder + '/' + f, 'r') as file_content:
             ret.append({'filename': f, 'content': file_content.read()})
     return json.dumps(ret), 200
-
-'''
-    Save received text into file
-    NOTE: file is the full file path
-'''
-@app.route('/file/save', methods=['GET'])
-def save_file():
-    file = request.args.get('file')
-    text = request.args.get('text')
-    with open(file, 'w') as f:
-      f.write(text)
-    return json.dumps("ok"), 200
-    
 
 '''
   Retrieve the tree in JSON format given the parent folder path.

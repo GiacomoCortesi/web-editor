@@ -30,10 +30,10 @@ export class DataService {
   }
 
   saveFile(file: string, text: string) {
-    let params = new HttpParams().set('file', file);
-    params = params.append('text', text);
+    const options = {headers: {'Content-Type': 'application/json'}};
+    let data = {'text': text, 'file': file}
     
-    return this.http.get(this.backend + '/file/save', {params: params})
+    return this.http.post(this.backend + '/file', JSON.stringify(data), options)
   }
 
   getTree() {
