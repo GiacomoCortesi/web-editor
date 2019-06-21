@@ -9,7 +9,8 @@ import { HttpParams } from '@angular/common/http';
 export class DataService {
 
   constructor(private http: HttpClient) { }
-  backend = "http://10.150.4.226:5000"
+  //backend = "http://10.150.4.226:5000"
+  backend = "http://172.17.0.2:5000"
 
   getFiles(folder: string) {
     return this.http.get(this.backend + '/' + folder)

@@ -21,9 +21,9 @@ export class ViewerComponent implements OnInit {
   private files;
   private filename: String;
   private text: string;
-  private editMode: bool = false;
+  private editMode: boolean = false;
   private selected_mtime: string;
-  private rerender: bool = false;
+  private rerender: boolean = false;
   private fileToCreate: string;
 
   constructor(private data: DataService, private dialog: MatDialog) {

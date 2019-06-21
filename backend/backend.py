@@ -71,11 +71,14 @@ def get_mtime():
 @app.route('/list/<name>', methods=['GET'])
 def list_files(name):
     files_list = [] 
-    for f in os.listdir(DIR_PATH + name):
-        if os.path.isfile(DIR_PATH + name + '/' + f):
-            files_list.append(f)
-    return json.dumps(files_list), 200    
-
+    
+    try:
+        for f in os.listdir(DIR_PATH + name):
+            if os.path.isfile(DIR_PATH + name + '/' + f):
+              files_list.append(f)
+        return json.dumps(files_list), 200    
+    except:
+     return "Unable to find the files", 404 
 
 '''
     Retrieve files from specified folder
@@ -84,12 +87,14 @@ def list_files(name):
 @app.route('/<folder>', methods=['GET'])
 def get_files(folder):
     ret = []
-    for f in os.listdir(DIR_PATH + folder):
-        print f
-        with open(DIR_PATH + folder + '/' + f, 'r') as file_content:
-            ret.append({'filename': f, 'content': file_content.read()})
-    return json.dumps(ret), 200
-
+    try:
+        for f in os.listdir(DIR_PATH + folder):
+            print f
+            with open(DIR_PATH + folder + '/' + f, 'r') as file_content:
+                ret.append({'filename': f, 'content': file_content.read()})
+        return json.dumps(ret), 200
+    except:
+        return "Unable to find the files", 404
 '''
   Retrieve the tree in JSON format given the parent folder path.
 '''

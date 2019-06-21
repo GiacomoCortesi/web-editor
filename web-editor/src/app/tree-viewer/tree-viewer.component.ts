@@ -16,19 +16,23 @@ const converter = new showdown.Converter();
   styleUrls: ['./tree-viewer.component.scss']
 })
 export class TreeViewerComponent implements OnInit {
-  treeControl = new NestedTreeControl<FoodNode>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<FoodNode>();
+
+  //TODO: Replace 'any' with actual data type
+  treeControl = new NestedTreeControl<any>(node => node.children);
+  dataSource = new MatTreeNestedDataSource<any>();
 
   private tree: Object;
   private path: string = "/root/xran-box/README.md"
-
+  private selected: string;
+  private selected_mtime: string;
   private text: string;
-  private editMode: bool = false;
+  private editMode: boolean = false;
+  private html: string;
 
   constructor(private data: DataService) {
   }
 
-  hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
+  hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   ngOnInit() {
     this.getTree()
     this.getFile(this.path, 'README.md');
