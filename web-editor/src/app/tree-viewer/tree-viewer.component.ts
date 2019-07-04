@@ -34,6 +34,8 @@ export class TreeViewerComponent implements OnInit {
 
   hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   ngOnInit() {
+    converter.setOption("tables", true)
+
     this.getTree()
     this.getFile(this.path, 'README.md');
   }

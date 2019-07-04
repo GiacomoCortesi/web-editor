@@ -30,6 +30,8 @@ export class ViewerComponent implements OnInit {
   }
 
   ngOnInit() {
+    converter.setOption("tables", true)
+    
     this.showFiles('cheatsheets');
     this.getFile(this.path, 'README.md');
   }
