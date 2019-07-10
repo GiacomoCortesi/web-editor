@@ -57,7 +57,8 @@ export class TreeViewerComponent implements OnInit {
     this.data.getFile(folder, filename).subscribe(
       data => {
       this.text = data
-      // console.log(filename)
+      this.path = folder
+      console.log(this.path)
       this.html = converter.makeHtml(data);
       // this.selected = filename.replace(/_/g, ' ').replace('.md', '').toUpperCase();
       this.selected=filename
@@ -84,6 +85,8 @@ export class TreeViewerComponent implements OnInit {
   }
 
   saveFile(file, text) {
+    console.log(file)
+    file = this.path + this.selected
     this.data.saveFile(file, text).subscribe(
       data => {
         this.getFile(this.path, this.selected);
