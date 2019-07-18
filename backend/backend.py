@@ -15,12 +15,11 @@ import subprocess
 app = Flask(__name__)
 CORS(app)
 
-DIR_PATH = "/root/mix_scripts/"
 TREE_DIR_PATH =  "/root/xran-box/"
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    return "yo yo yo\n"
 
 '''
     Retrieve single <file> inside <folder>

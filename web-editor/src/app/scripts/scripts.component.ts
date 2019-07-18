@@ -9,12 +9,13 @@ import { DataService } from '../data.service';
 export class ScriptsComponent implements OnInit {
 
   constructor(private data: DataService) { }
+  private path: string = "/root/mix_scripts/scripts"
   private files;
   private filesContent: Object;
   private html;
   ngOnInit() {
-    this.showFiles('scripts');
-    this.getFiles('scripts')
+    this.showFiles(this.path);
+    this.getFiles(this.path)
   }
   
   showFiles(folder) {
