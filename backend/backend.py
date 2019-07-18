@@ -10,6 +10,7 @@ import json
 import datetime
 import sys
 import errno
+import subprocess
 
 app = Flask(__name__)
 CORS(app)
@@ -25,7 +26,7 @@ def hello():
     Retrieve single <file> inside <folder>
 '''
 # File is the target file inside the folder
-@app.route('/file', methods=['GET', 'POST'])
+@app.route('/file', methods=['GET', 'POST', 'DELETE'])
 def handle_file():
   # Handle GET request
   if request.method == "GET":
@@ -51,8 +52,20 @@ def handle_file():
     with open(file, 'w+') as f:
       f.write(text)
     return json.dumps("ok"), 200
-    
-
+  # Handle DELETE request
+  if request.method == "DELETE":
+    '''
+    Delete single <file> from specified <folder>
+    '''
+    p = request.args.get('path')
+    f = request.args.get('file')
+    try:
+      file = os.path.join(p,f)
+      cmd = "rm -f {}".format(file).split()
+      exit_code = subprocess.check_call(cmd)
+      return json.dumps("ok"), 200
+    except subprocess.CalledProcessError:
+        abort(404)
 
 '''
     Return formatted modification time of specified file
@@ -68,13 +81,14 @@ def get_mtime():
 '''
     Return the list of filenames inside specified folder
 '''
-@app.route('/list/<name>', methods=['GET'])
-def list_files(name):
+@app.route('/files/list', methods=['GET'])
+def list_files():
+    p = request.args.get('path')
     files_list = [] 
     
     try:
-        for f in os.listdir(DIR_PATH + name):
-            if os.path.isfile(DIR_PATH + name + '/' + f):
+        for f in os.listdir(p):
+            if os.path.isfile(p + '/' + f):
               files_list.append(f)
         return json.dumps(files_list), 200    
     except:
@@ -84,13 +98,14 @@ def list_files(name):
     Retrieve files from specified folder
     Note that base path is set to DIR_PATH
 '''
-@app.route('/<folder>', methods=['GET'])
-def get_files(folder):
+@app.route('/files/content', methods=['GET'])
+def get_files():
+    p = request.args.get('path')
     ret = []
     try:
-        for f in os.listdir(DIR_PATH + folder):
+        for f in os.listdir(p):
             print f
-            with open(DIR_PATH + folder + '/' + f, 'r') as file_content:
+            with open(p + '/' + f, 'r') as file_content:
                 ret.append({'filename': f, 'content': file_content.read()})
         return json.dumps(ret), 200
     except:

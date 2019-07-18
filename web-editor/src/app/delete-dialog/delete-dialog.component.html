@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Delete File {{ data.filename }}</h1>
+<p>Are you sure?</p>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial (click)="onNoClick()">No</button>
+  <button mat-button (click)="onYesClick(data.path, data.filename)">Yes</button>
+</div>

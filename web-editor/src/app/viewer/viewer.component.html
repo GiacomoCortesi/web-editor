@@ -8,7 +8,7 @@ accept=".txt"
       <mat-card>
         <mat-nav-list>
             <!-- <mat-list-item (click)="createFile()"> -->
-            <mat-list-item (click)="openDialog()">
+            <mat-list-item (click)="openCreateDialog()">
                 NEW FILE
                 <mat-icon class="my-mat-icon">create</mat-icon>
               <mat-divider></mat-divider>
@@ -24,6 +24,7 @@ accept=".txt"
       <mat-card>
         <mat-card-header>
           <mat-card-title>{{ selected }}</mat-card-title>
+          <button class="custom-icon-button" (click)="openDeleteDialog()" mat-icon-button><mat-icon>delete</mat-icon></button>
           <mat-card-subtitle> {{ selected_mtime }} </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="my-mat-card-content">

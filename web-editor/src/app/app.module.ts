@@ -25,6 +25,7 @@ import { ViewerComponent } from './viewer/viewer.component';
 import { ScriptsComponent } from './scripts/scripts.component';
 import { TreeViewerComponent } from './tree-viewer/tree-viewer.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 
 
@@ -37,7 +38,8 @@ import { DialogComponent } from './dialog/dialog.component';
     ViewerComponent,
     ScriptsComponent,
     TreeViewerComponent,
-    DialogComponent
+    DialogComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,7 @@ import { DialogComponent } from './dialog/dialog.component';
     MatInputModule,
     MatDialogModule
   ],
-  entryComponents: [DialogComponent],
+  entryComponents: [DialogComponent, DeleteDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

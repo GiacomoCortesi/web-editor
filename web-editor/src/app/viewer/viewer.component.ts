@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from  '../data.service';
 import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { DialogComponent } from '../dialog/dialog.component';
 
 
@@ -26,13 +27,13 @@ export class ViewerComponent implements OnInit {
   private rerender: boolean = false;
   private fileToCreate: string;
 
-  constructor(private data: DataService, private dialog: MatDialog) {
+  constructor(private data: DataService, private createDialog: MatDialog, private deleteDialog: MatDialog) {
   }
 
   ngOnInit() {
     converter.setOption("tables", true)
     
-    this.showFiles('cheatsheets');
+    this.showFiles(this.path);
     this.getFile(this.path, 'README.md');
   }
 
@@ -66,6 +67,7 @@ export class ViewerComponent implements OnInit {
     });
     this.editMode = false;
   }
+  
 
   getMtime(folder, filename) {
     this.data.getMtime(folder, filename).subscribe(
@@ -97,25 +99,37 @@ export class ViewerComponent implements OnInit {
   saveFile(file, text) {
     this.data.saveFile(file, text).subscribe(
       data => {
-        this.showFiles('cheatsheets')
+        this.showFiles(this.path)
         this.getFile(this.path, this.selected);
       }); 
     this.editMode = false;
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
+  openCreateDialog(): void {
+    const createDialogRef = this.createDialog.open(DialogComponent, {
       width: '250px',
       data: {filename: this.fileToCreate}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    createDialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log("Received dialog data: "+ result)
       if (result) {
         this.selected = result;
         this.saveFile(this.path + '/' + result, "Brand new file")
       }
+    });
+  }
+
+  openDeleteDialog(): void {
+    const deleteDialogRef = this.deleteDialog.open(DeleteDialogComponent, {
+      width: '250px',
+      data: {path: this.path, filename: this.selected}
+    });
+    deleteDialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.showFiles(this.path)
+      this.getFile(this.path, 'README.md');
     });
   }
 

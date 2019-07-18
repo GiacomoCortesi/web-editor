@@ -9,12 +9,8 @@ import { HttpParams } from '@angular/common/http';
 export class DataService {
 
   constructor(private http: HttpClient) { }
-  //backend = "http://10.150.4.226:5000"
-  backend = "http://172.17.0.2:5000"
-
-  getFiles(folder: string) {
-    return this.http.get(this.backend + '/' + folder)
-  }
+  backend = "http://10.150.4.226:5000"
+  //backend = "http://172.17.0.2:5000"
 
   getFile(path: string, file: string) {
     let params = new HttpParams().set('path', path);
@@ -36,12 +32,25 @@ export class DataService {
     
     return this.http.post(this.backend + '/file', JSON.stringify(data), options)
   }
+  
+  deleteFile(path: string, file: string) {
+    let params = new HttpParams().set('path', path);
+    params = params.append('file', file);
+
+    return this.http.delete(this.backend + '/file', {params: params})
+  }
 
   getTree() {
     return this.http.get(this.backend + '/tree')
   }
 
-  listFiles(folder) {
-    return this.http.get(this.backend + '/list/' + folder)
+  listFiles(path: string) {
+    let params = new HttpParams().set('path', path);
+    return this.http.get(this.backend + '/files/list', {params: params})
+  }
+  
+  getFiles(path: string) {
+    let params = new HttpParams().set('path', path);
+    return this.http.get(this.backend + '/files/content', {params: params})
   }
 }
