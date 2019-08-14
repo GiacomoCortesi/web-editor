@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="files; else notShow" class="container">
 <mat-grid-list cols="2" rowHeight="50em" gutterSize="3em">
   <div class="mat-card-wrapper" *ngFor="let item of filesContent">
     <mat-grid-tile class="my-mat-grid-tile">
@@ -7,11 +7,19 @@
           <mat-card-title>{{ item.filename }}</mat-card-title>
         </mat-card-header>
         <mat-card-content >
-          <div class="text-div"> <span>{{ item.content }}</span> </div>
-<!--  <textarea>{{ item.content }}</textarea> -->
+          <div class="text-div"> <!--  <span>{{ item.content }}</span> </div>--> 
+            <textarea>{{ item.content }}</textarea> 
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
   </div>
 </mat-grid-list>
 </div>
+<ng-template #notShow>
+  <div class="loading-div">
+    <div class="vertical-center">
+      <mat-spinner class="custom-spinner"></mat-spinner>  
+    </div>
+  </div>
+</ng-template>

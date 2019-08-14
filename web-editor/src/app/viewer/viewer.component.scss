@@ -29,9 +29,9 @@ a:active {
 .my-mat-icon {
   margin-left: auto;
 }
-.custom-stroked-button {
-  margin-left: 1.25em;
-  margin-bottom: 1.25em;
+
+.mat-icons-cont {
+  margin-left: auto;
 }
 
 .custom-icon-button {
@@ -63,24 +63,30 @@ a:active {
 
 textarea {
   border: none;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   outline: none;
   width: 100%;
   height: 100%;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-
+  margin: 1em;
   resize: none; /*remove the resize handle on the bottom right*/
+  font-size: 15px;
 }
 
 .text-div {
   // Adapt div size to content
   display: block;
-  overflow: auto;
+  overflow: hidden;
   // Always Display left scroll bar
   //overflow-y: scroll;
   // Set div max height
   max-height: 38em;
-  height: 35em;
+  height: 30em;
+}
+
+.nav-mat-card {
+  padding: 0px;
 }

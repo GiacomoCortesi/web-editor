@@ -16,6 +16,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTreeModule} from '@angular/material/tree';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 // Import components
 import { AppComponent } from './app.component';
@@ -56,7 +57,8 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
     MatGridListModule,
     MatTreeModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [DialogComponent, DeleteDialogComponent],
   providers: [],

@@ -1,17 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
 
+// Define custom mat-tab-nav styiling
 .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
-  background: blue;
+  background: #108B68;
   margin-bottom: -2em;
   height: 10px;
 }
-
  
 html, body { 
   height: 100%;
- }
+}
 
 body { 
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #F1F3F5
 }
+
+// Define custom mat-spinner styling
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: cadetblue;
+}
+.mat-progress-spinner.mat-progress-spinner-indeterminate-animation[mode=indeterminate] circle {
+    animation-duration: 12s!important;
+}
+

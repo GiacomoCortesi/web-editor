@@ -16,7 +16,7 @@
 
 
 <nav mat-tab-nav-bar class="demo-tab-group">
-  <a mat-tab-link
+  <a mat-tab-link disableRipple=true 
      *ngFor="let link of ['viewer', 'scripts', 'tree-viewer']"
      [routerLink]="link"
      routerLinkActive #rla="routerLinkActive"
