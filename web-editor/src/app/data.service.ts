@@ -12,30 +12,27 @@ export class DataService {
   backend = "http://10.150.4.226:5000"
   //backend = "http://172.17.0.2:5000"
 
-  getFile(path: string, file: string) {
-    let params = new HttpParams().set('path', path);
-    params = params.append('file', file);
+  getFile(file: string) {
+    let params = new HttpParams().set('file', file);
 
     return this.http.get(this.backend + '/file', {responseType: 'text', params: params})
   }
 
-  getMtime(path: string, file: string) {
-    let params = new HttpParams().set('path', path);
-    params = params.append('file', file);
+  getMtime(file: string) {
+    let params = new HttpParams().set('file', file);
     
     return this.http.get(this.backend + '/file/mtime', {responseType: 'text', params: params})
   }
 
-  saveFile(file: string, text: string) {
+  saveFile(file:string, text: string) {
     const options = {headers: {'Content-Type': 'application/json'}};
     let data = {'text': text, 'file': file}
     
     return this.http.post(this.backend + '/file', JSON.stringify(data), options)
   }
   
-  deleteFile(path: string, file: string) {
-    let params = new HttpParams().set('path', path);
-    params = params.append('file', file);
+  deleteFile(file: string) {
+    let params = new HttpParams().set('file', file);
 
     return this.http.delete(this.backend + '/file', {params: params})
   }
@@ -47,6 +44,14 @@ export class DataService {
   listFiles(path: string) {
     let params = new HttpParams().set('path', path);
     return this.http.get(this.backend + '/files/list', {params: params})
+  }
+
+  getCSPath() {
+    return this.http.get(this.backend + '/path/cheatsheets')
+  }
+
+  getScriptsPath() {
+    return this.http.get(this.backend + '/path/scripts')
   }
   
   getFiles(path: string) {

@@ -16,7 +16,7 @@ const converter = new showdown.Converter();
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit {
-  private path: string = '/root/mix_scripts/cheatsheets'
+  private path: string
   private html
   private selected: String;
   private files;
@@ -34,12 +34,17 @@ export class ViewerComponent implements OnInit {
     converter.setOption("tables", true)
     converter.setOption("emoji", true)
     
-    this.showFiles(this.path);
-    this.getFile(this.path, 'README.md');
+    this.data.getCSPath().subscribe(
+      data => {
+        this.path = data
+        this.showFiles(this.path);
+        this.getFile(this.path + 'README.md');
+      }
+    )
   }
 
-  showFiles(folder) {
-    this.data.listFiles(folder).subscribe(
+  showFiles(path) {
+    this.data.listFiles(path).subscribe(
       data => {
       this.files = data;
       // Skip files starting with '.'
@@ -55,15 +60,15 @@ export class ViewerComponent implements OnInit {
       });
   }
   
-  getFile(folder, filename) {
-    this.data.getFile(folder, filename).subscribe(
+  getFile(f) {
+    this.data.getFile(f).subscribe(
       data => {
       // console.log(filename)
       this.html = converter.makeHtml(data);
       this.text = data
       // this.selected = filename.replace(/_/g, ' ').replace('.md', '').toUpperCase();
-      this.selected=filename
-      this.selected_mtime = <string><unknown>this.getMtime(folder, filename);
+      this.selected=f
+      this.selected_mtime = <string><unknown>this.getMtime(f);
       console.log(data);
     });
     this.editMode = false;
@@ -101,7 +106,7 @@ export class ViewerComponent implements OnInit {
     this.data.saveFile(file, text).subscribe(
       data => {
         this.showFiles(this.path)
-        this.getFile(this.path, this.selected);
+        this.getFile(this.selected);
       }); 
     this.editMode = false;
   }
@@ -109,7 +114,7 @@ export class ViewerComponent implements OnInit {
   openCreateDialog(): void {
     const createDialogRef = this.createDialog.open(DialogComponent, {
       width: '250px',
-      data: {filename: this.fileToCreate}
+      data: {file: this.fileToCreate}
     });
 
     createDialogRef.afterClosed().subscribe(result => {
@@ -125,12 +130,12 @@ export class ViewerComponent implements OnInit {
   openDeleteDialog(): void {
     const deleteDialogRef = this.deleteDialog.open(DeleteDialogComponent, {
       width: '250px',
-      data: {path: this.path, filename: this.selected}
+      data: {file: this.selected}
     });
     deleteDialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.showFiles(this.path)
-      this.getFile(this.path, 'README.md');
+      this.getFile(this.selected);
     });
   }
 

@@ -16,6 +16,8 @@ app = Flask(__name__)
 CORS(app)
 
 TREE_DIR_PATH =  "/root/xran-box/"
+SCRIPTS_PATH =  "/root/mix_scripts/scripts/"
+CHEATSHEETS_PATH =  "/root/mix_scripts/cheatsheets/"
 
 @app.route('/')
 def hello():
@@ -32,10 +34,9 @@ def handle_file():
     '''
     Retrieve file at specified path
     '''
-    p = request.args.get('path')
     f = request.args.get('file')
     try:
-      with open(os.path.join(p, f), 'r') as file: 
+      with open(f, 'r') as file: 
           return file.read(), 200
     except IOError:
       abort(404)
@@ -43,10 +44,11 @@ def handle_file():
   if request.method == "POST":
     '''
     Save received text into file
-    NOTE: file is the full file path
     '''
     jsonData = request.get_json()
     file = jsonData['file']
+    if '.md' not in file:
+      file = file + '.md'
     text = jsonData['text'].encode('utf-8')
     with open(file, 'w+') as f:
       f.write(text)
@@ -54,13 +56,11 @@ def handle_file():
   # Handle DELETE request
   if request.method == "DELETE":
     '''
-    Delete single <file> from specified <folder>
+    Delete single file
     '''
-    p = request.args.get('path')
     f = request.args.get('file')
     try:
-      file = os.path.join(p,f)
-      cmd = "rm -f {}".format(file).split()
+      cmd = "rm -f {}".format(f).split()
       exit_code = subprocess.check_call(cmd)
       return json.dumps("ok"), 200
     except subprocess.CalledProcessError:
@@ -71,9 +71,8 @@ def handle_file():
 '''
 @app.route('/file/mtime', methods=['GET'])
 def get_mtime():
-    p = request.args.get('path')
     f = request.args.get('file')
-    mtime_raw = os.path.getmtime(os.path.join(p, f))
+    mtime_raw = os.path.getmtime(f)
     mod_timestamp = str(datetime.datetime.fromtimestamp(mtime_raw))
     return mod_timestamp, 200
 
@@ -82,9 +81,8 @@ def get_mtime():
 '''
 @app.route('/files/list', methods=['GET'])
 def list_files():
-    p = request.args.get('path')
     files_list = [] 
-    
+    p = request.args.get('path')
     try:
         for f in os.listdir(p):
             if os.path.isfile(p + '/' + f):
@@ -92,6 +90,14 @@ def list_files():
         return json.dumps(files_list), 200    
     except:
      return "Unable to find the files", 404 
+
+@app.route('/path/scripts', methods=['GET'])
+def get_scripts_path():
+  return json.dumps(SCRIPTS_PATH), 200
+
+@app.route('/path/cheatsheets', methods=['GET'])
+def get_cheatsheets_path():
+  return json.dumps(CHEATSHEETS_PATH), 200    
 
 '''
     Retrieve files from specified folder

@@ -24,7 +24,6 @@ export class TreeViewerComponent implements OnInit {
   dataSource = new MatTreeNestedDataSource<any>();
 
   private tree: Object;
-  private path: string = "/root/xran-box/README.md"
   private selected: string;
   private selected_mtime: string;
   private text: string;
@@ -40,38 +39,34 @@ export class TreeViewerComponent implements OnInit {
     converter.setOption("emoji", true)
 
     this.getTree()
-    this.getFile(this.path, 'README.md');
+
   }
 
   getTree() {
     this.data.getTree().subscribe(
       data => {
       this.tree = data;
+      this.getFile(this.tree['children'][1]['path']);
       this.dataSource.data = this.tree['children'];
       console.log(this.tree);
       });
   }
 
-  getFile(folder, filename) {
-    //Horrible trick to remove the filename from the path
-    let to_remove = folder.replace(/.*\/(.*)/,'$1');
-    folder = folder.replace(to_remove, '')
-    this.data.getFile(folder, filename).subscribe(
+  getFile(f) {
+    this.data.getFile(f).subscribe(
       data => {
       this.text = data
-      this.path = folder
-      console.log(this.path)
-      this.html = this.style + converter.makeHtml(data);
-      // this.selected = filename.replace(/_/g, ' ').replace('.md', '').toUpperCase();
-      this.selected=filename
-      this.selected_mtime = <string><unknown>this.getMtime(folder, filename);
-      console.log(data);
+      console.log(f)
+      this.html = converter.makeHtml(data);
+
+      this.selected=f
+      this.selected_mtime = <string><unknown>this.getMtime(f);
       this.editMode = false;
     });
   }
 
-  getMtime(folder, filename) {
-    this.data.getMtime(folder, filename).subscribe(
+  getMtime(f) {
+    this.data.getMtime(f).subscribe(
       data => {
       this.selected_mtime = data;
       console.log(data)
@@ -88,23 +83,23 @@ export class TreeViewerComponent implements OnInit {
 
   saveFile(file, text) {
     console.log(file)
-    file = this.path + this.selected
+    file = this.selected
     this.data.saveFile(file, text).subscribe(
       data => {
-        this.getFile(this.path, this.selected);
+        this.getFile(this.selected);
       }); 
     this.editMode = false;
   }
 
   openDeleteDialog(): void {
+    console.log("File to be deleted: " + this.selected)
     const deleteDialogRef = this.deleteDialog.open(DeleteDialogComponent, {
       width: '250px',
-      data: {path: this.path, filename: this.selected}
+      data: {file: this.selected}
     });
     deleteDialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.getTree()
-      this.getFile(this.path, 'README.md');
     });
   }
 

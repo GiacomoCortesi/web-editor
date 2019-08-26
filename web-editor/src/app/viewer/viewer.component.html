@@ -2,7 +2,7 @@
 type="file" 
 accept=".txt" 
 (change)="fileUpload($event)"> -->
-<div *ngIf="files; else notShow" class="container">
+<div *ngIf="files && selected; else notShow" class="container">
   <div class="row">
     <div class="col-sm-3">
       <mat-card class="nav-mat-card">
@@ -13,7 +13,7 @@ accept=".txt"
                 <mat-icon class="my-mat-icon">add</mat-icon>
               <mat-divider></mat-divider>
             </mat-list-item>
-          <mat-list-item (click)="getFile(this.path, f)" *ngFor="let f of files">
+          <mat-list-item (click)="getFile(path + f)" *ngFor="let f of files">
             {{ prettify(f) }}
           <mat-divider></mat-divider>
           </mat-list-item>
@@ -23,10 +23,10 @@ accept=".txt"
     <div class="col-sm-9">
       <mat-card class="my-mat-card">
         <mat-card-header>
-          <mat-card-title>{{ selected }}</mat-card-title>
+          <mat-card-title>{{ selected.replace(path, '') }}</mat-card-title>
           <div class="mat-icons-cont">
             <button class="custom-icon-button" [disabled]="editMode" (click)="enableEditMode()" mat-icon-button><mat-icon>edit</mat-icon></button>
-            <button *ngIf="editMode" (click)="saveFile(this.path + '/' + selected, text)" class="custom-icon-button" mat-icon-button><mat-icon>save</mat-icon></button>
+            <button *ngIf="editMode" (click)="saveFile(selected, text)" class="custom-icon-button" mat-icon-button><mat-icon>save</mat-icon></button>
 	          <button class="custom-icon-button" (click)="openDeleteDialog()" mat-icon-button><mat-icon>delete</mat-icon></button>
           </div>
           <mat-card-subtitle> {{ selected_mtime }} </mat-card-subtitle>

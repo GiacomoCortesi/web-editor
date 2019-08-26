@@ -18,11 +18,12 @@ export class DeleteDialogComponent {
   onYesClick(): void {
     this.dialogRef.close();
     console.log("Deleting file " + this.data.filename)
-    this.deleteFile(this.data.path, this.data.filename)
+    this.deleteFile(this.data.file)
+    location.reload()
   }
   
-  deleteFile(folder, filename) {
-    this.dataService.deleteFile(folder, filename).subscribe(
+  deleteFile(f) {
+    this.dataService.deleteFile(f).subscribe(
       result => {
       console.log(result);
     });

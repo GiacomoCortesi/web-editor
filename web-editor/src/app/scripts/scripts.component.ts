@@ -9,17 +9,23 @@ import { DataService } from '../data.service';
 export class ScriptsComponent implements OnInit {
 
   constructor(private data: DataService) { }
-  private path: string = "/root/mix_scripts/scripts"
+  private path: string;
   private files;
   private filesContent: Object;
   private html;
+
   ngOnInit() {
-    this.showFiles(this.path);
-    this.getFiles(this.path)
+    this.data.getScriptsPath().subscribe(
+      data => {
+        this.path = data
+        this.showFiles(this.path);
+        this.getFiles(this.path)
+      }
+    )
   }
   
-  showFiles(folder) {
-    this.data.listFiles(folder).subscribe(
+  showFiles(path) {
+    this.data.listFiles(path).subscribe(
       data => {
       this.files = data;
       // Skip files starting with '.'
@@ -31,9 +37,10 @@ export class ScriptsComponent implements OnInit {
           }
         }
       }
-      console.log(data)
+      console.log(this.files)
       });
   }
+  
 
   getFiles(folder) {
     this.data.getFiles(folder).subscribe(

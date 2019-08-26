@@ -1,15 +1,13 @@
-
-<div *ngIf="tree; else notShow" class="container">
+<div *ngIf="tree && selected; else notShow" class="container">
   <div class="row">
     <div class="col-sm-3">
-      <mat-card>
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
         <!-- This is the tree node template for leaf nodes -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
             <div class=div-border>
               <li class="mat-tree-node-leaf">
                 <!-- use a disabled button to provide padding for tree leaf -->
-                <a (click)="getFile(node.path, node.name)" >{{ prettify(node.name) }}</a> 
+                <a (click)="getFile(node.path)" >{{ prettify(node.name) }}</a> 
               </li>
             </div>
           </mat-tree-node>
@@ -31,15 +29,14 @@
              </li>
            </mat-nested-tree-node>
         </mat-tree>
-      </mat-card>
     </div>
     <div class="col-sm-9">
       <mat-card>
         <mat-card-header>
-          <mat-card-title>{{ selected }}</mat-card-title>
+          <mat-card-title>{{ selected.replace(tree.path, '') }}</mat-card-title>
           <div class="mat-icons-cont">
             <button class="custom-icon-button" [disabled]="editMode" (click)="enableEditMode()" mat-icon-button><mat-icon>edit</mat-icon></button>
-            <button *ngIf="editMode" (click)="saveFile(this.path + '/' + selected, text)" class="custom-icon-button" mat-icon-button><mat-icon>save</mat-icon></button>
+            <button *ngIf="editMode" (click)="saveFile(this.selected, text)" class="custom-icon-button" mat-icon-button><mat-icon>save</mat-icon></button>
 	          <button class="custom-icon-button" (click)="openDeleteDialog()" mat-icon-button><mat-icon>delete</mat-icon></button>
           </div>
           <mat-card-subtitle> {{ selected_mtime }} </mat-card-subtitle>
