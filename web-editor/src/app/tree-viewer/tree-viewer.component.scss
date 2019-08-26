@@ -13,6 +13,7 @@ a {
   text-decoration: none;
   cursor: pointer;
   color: black;
+  width: 200px;
 }
 
 .container {
@@ -80,7 +81,20 @@ textarea {
   height: 35em;
 }
 
+.mat-tree-node-leaf {
+  font-size: 16px;
+}
+
+.mat-tree-node-exp {
+  font-weight: bold;
+  font-size: 16px;
+}
 .custom-stroked-button {
   margin-left: 1.25em;
   margin-bottom: 1.25em;
 }
+
+.mat-icons-cont {
+  margin-left: auto;
+}
+

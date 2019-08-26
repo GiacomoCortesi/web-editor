@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import { DataService } from  '../data.service';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 // TODO: Add service for file handling, to be used both by viewer and tree-viewer components
 // NOTE: This will require some refactoring  
@@ -29,12 +31,13 @@ export class TreeViewerComponent implements OnInit {
   private editMode: boolean = false;
   private html: string;
 
-  constructor(private data: DataService) {
+  constructor(private data: DataService, private deleteDialog: MatDialog) {
   }
 
   hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   ngOnInit() {
     converter.setOption("tables", true)
+    converter.setOption("emoji", true)
 
     this.getTree()
     this.getFile(this.path, 'README.md');
@@ -50,7 +53,6 @@ export class TreeViewerComponent implements OnInit {
   }
 
   getFile(folder, filename) {
-
     //Horrible trick to remove the filename from the path
     let to_remove = folder.replace(/.*\/(.*)/,'$1');
     folder = folder.replace(to_remove, '')
@@ -59,7 +61,7 @@ export class TreeViewerComponent implements OnInit {
       this.text = data
       this.path = folder
       console.log(this.path)
-      this.html = converter.makeHtml(data);
+      this.html = this.style + converter.makeHtml(data);
       // this.selected = filename.replace(/_/g, ' ').replace('.md', '').toUpperCase();
       this.selected=filename
       this.selected_mtime = <string><unknown>this.getMtime(folder, filename);
@@ -92,6 +94,18 @@ export class TreeViewerComponent implements OnInit {
         this.getFile(this.path, this.selected);
       }); 
     this.editMode = false;
+  }
+
+  openDeleteDialog(): void {
+    const deleteDialogRef = this.deleteDialog.open(DeleteDialogComponent, {
+      width: '250px',
+      data: {path: this.path, filename: this.selected}
+    });
+    deleteDialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.getTree()
+      this.getFile(this.path, 'README.md');
+    });
   }
 
 }

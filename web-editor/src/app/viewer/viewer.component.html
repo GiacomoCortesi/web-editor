@@ -27,7 +27,7 @@ accept=".txt"
           <div class="mat-icons-cont">
             <button class="custom-icon-button" [disabled]="editMode" (click)="enableEditMode()" mat-icon-button><mat-icon>edit</mat-icon></button>
             <button *ngIf="editMode" (click)="saveFile(this.path + '/' + selected, text)" class="custom-icon-button" mat-icon-button><mat-icon>save</mat-icon></button>
-	    <button class="custom-icon-button" (click)="openDeleteDialog()" mat-icon-button><mat-icon>delete</mat-icon></button>
+	          <button class="custom-icon-button" (click)="openDeleteDialog()" mat-icon-button><mat-icon>delete</mat-icon></button>
           </div>
           <mat-card-subtitle> {{ selected_mtime }} </mat-card-subtitle>
         </mat-card-header>

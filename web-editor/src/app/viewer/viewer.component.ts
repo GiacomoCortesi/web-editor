@@ -32,6 +32,7 @@ export class ViewerComponent implements OnInit {
 
   ngOnInit() {
     converter.setOption("tables", true)
+    converter.setOption("emoji", true)
     
     this.showFiles(this.path);
     this.getFile(this.path, 'README.md');

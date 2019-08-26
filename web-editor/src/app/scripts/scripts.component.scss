@@ -29,6 +29,7 @@ span {
 .text-div {
   // Adapt div size to content
   display: block;
+  width: 100%;
   overflow: hidden;
   // Always Display left scroll bar
   //overflow-y: scroll;
@@ -42,7 +43,7 @@ span {
 }
 
 mat-card-content {
-  margin: 2.5em;
+  //margin: 2.5em;
 }
 
 .my-mat-card-header {
