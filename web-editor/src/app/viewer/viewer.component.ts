@@ -16,7 +16,7 @@ const converter = new showdown.Converter();
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit {
-  private path: string
+  private path: string;
   private html
   private selected: String;
   private files;
@@ -36,7 +36,7 @@ export class ViewerComponent implements OnInit {
     
     this.data.getCSPath().subscribe(
       data => {
-        this.path = data
+        this.path = <string><unknown>data
         this.showFiles(this.path);
         this.getFile(this.path + 'README.md');
       }
@@ -75,8 +75,8 @@ export class ViewerComponent implements OnInit {
   }
   
 
-  getMtime(folder, filename) {
-    this.data.getMtime(folder, filename).subscribe(
+  getMtime(folder) {
+    this.data.getMtime(folder).subscribe(
       data => {
       this.selected_mtime = data;
       console.log(data)

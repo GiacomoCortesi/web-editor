@@ -7,9 +7,11 @@
           <mat-card-title>{{ item.filename }}</mat-card-title>
         </mat-card-header>
         <mat-card-content >
-          <div class="text-div"> <!--  <span>{{ item.content }}</span> </div>--> 
-            <textarea>{{ item.content }}</textarea> 
+	<pre class="prettyprint">
+          <div class="text-div scrollbar-primary"> <!--  <span>{{ item.content }}</span> </div>--> 
+              {{ item.content }}
           </div>
+ 	</pre>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

@@ -3,6 +3,15 @@
   width: 100%;
 }
 
+.scrollbar-primary::-webkit-scrollbar {
+    width: 8px;
+    background-color: #f1f3f5;
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background-color: #737475bf;
+}
 
 textarea {
   border: none;
@@ -14,7 +23,7 @@ textarea {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  margin: 1em;
+  padding: 1em;
   resize: none; /*remove the resize handle on the bottom right*/
   font-size: 15px;
   font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
@@ -27,10 +36,13 @@ span {
 
 
 .text-div {
+  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+  padding: 2em;
+  overflow-x: hidden;
+  overflow-y: auto;
   // Adapt div size to content
   display: block;
   width: 100%;
-  overflow: hidden;
   // Always Display left scroll bar
   //overflow-y: scroll;
   // Set div max height

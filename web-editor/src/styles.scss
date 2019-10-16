@@ -17,6 +17,15 @@ body {
   background: #F1F3F5
 }
 
+body::-webkit-scrollbar {
+    width: 8px;
+    background-color: #f1f3f5;
+}
+body::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background-color: #587ea58f;
+}
+
 // Define custom mat-spinner styling
 .mat-progress-spinner circle, .mat-spinner circle {
   stroke: cadetblue;
@@ -25,3 +34,27 @@ body {
     animation-duration: 12s!important;
 }
 
+pre.prettyprint { 
+  display: block;
+  background-color: inherit;
+  border: none;
+}
+
+pre {
+  background-color: inherit;
+  padding: 1em;
+
+}
+
+@media print {
+  pre .str, code .str { color: #060 }
+  pre .kwd, code .kwd { color: #006; font-weight: bold }
+  pre .com, code .com { color: #600; font-style: italic }
+  pre .typ, code .typ { color: #404; font-weight: bold }
+  pre .lit, code .lit { color: #044 }
+  pre .pun, code .pun { color: #440 }
+  pre .pln, code .pln { color: #000 }
+  pre .tag, code .tag { color: #006; font-weight: bold }
+  pre .atn, code .atn { color: #404 }
+  pre .atv, code .atv { color: #060 }
+}

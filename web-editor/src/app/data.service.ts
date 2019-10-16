@@ -9,8 +9,8 @@ import { HttpParams } from '@angular/common/http';
 export class DataService {
 
   constructor(private http: HttpClient) { }
-  backend = "http://10.150.4.226:5000"
-  //backend = "http://172.17.0.2:5000"
+  //backend = "http://" + window.location.host + ":5000" 
+  backend = "http://10.150.4.226:5000" 
 
   getFile(file: string) {
     let params = new HttpParams().set('file', file);
