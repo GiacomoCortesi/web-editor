@@ -93,11 +93,11 @@ def list_files():
 
 @app.route('/path/scripts', methods=['GET'])
 def get_scripts_path():
-  return json.dumps(SCRIPTS_PATH), 200
+  return json.dumps({"scripts_path": SCRIPTS_PATH}), 200
 
 @app.route('/path/cheatsheets', methods=['GET'])
 def get_cheatsheets_path():
-  return json.dumps(CHEATSHEETS_PATH), 200    
+  return json.dumps({"cheatsheets_path": CHEATSHEETS_PATH}), 200    
 
 '''
     Retrieve files from specified folder

@@ -1,3 +1,11 @@
+div.mat-tree-node-exp {
+  background-color: #f1f3f5;
+}
+
+mat-tree-node {
+  background-color: #f1f3f5;
+}
+
 .example-tree-invisible {
   display: none;
 }
@@ -5,11 +13,13 @@
 .example-tree ul,
 .example-tree li {
   margin-top: 0;
+  background-color: #f1f3f5;
   margin-bottom: 0;
   list-style-type: none;
 }
 
 a {
+  padding: 1em;
   text-decoration: none;
   cursor: pointer;
   color: black;
@@ -86,8 +96,12 @@ textarea {
 }
 
 .mat-tree-node-exp {
+  border-style: solid;
+  border-radius: 1.5em;
+  border-color: #108b68;
   font-weight: bold;
   font-size: 16px;
+  margin-top: 0.5em;
 }
 .custom-stroked-button {
   margin-left: 1.25em;

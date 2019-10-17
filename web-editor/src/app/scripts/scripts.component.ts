@@ -17,7 +17,7 @@ export class ScriptsComponent implements OnInit {
   ngOnInit() {
     this.data.getScriptsPath().subscribe(
       data => {
-        this.path = <string><unknown>data
+        this.path = data["scripts_path"]
         this.showFiles(this.path);
         this.getFiles(this.path)
       }

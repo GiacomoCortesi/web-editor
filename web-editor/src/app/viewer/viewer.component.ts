@@ -36,7 +36,7 @@ export class ViewerComponent implements OnInit {
     
     this.data.getCSPath().subscribe(
       data => {
-        this.path = <string><unknown>data
+        this.path = data["cheatsheets_path"]
         this.showFiles(this.path);
         this.getFile(this.path + 'README.md');
       }
